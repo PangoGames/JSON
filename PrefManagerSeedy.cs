@@ -47,13 +47,23 @@ public class PrefManagerSeedy
             
             PlayerPrefs.SetString(fruitCountName+_fruit_counters,fruitsx[(int)(_fruit_counters)]);
         }
+        public static void SetfruitCount(int _fruit_counters, int fruitCountval)
+        {
+        PlayerPrefs.SetInt(fruitCount + _fruit_counters, fruitCountval);
 
-        public static int GetfruitCount(fruit_counter fruitval)
+         PlayerPrefs.SetString(fruitCountName + _fruit_counters, fruitsx[(_fruit_counters)]);
+         }
+
+    public static int GetfruitCount(fruit_counter fruitval)
         {
             return PlayerPrefs.GetInt(fruitCount+fruitval);
         }
-        
-        public static string GetfruitCountName(fruit_counter fruit_countersx)
+    public static int GetfruitCount(int fruitval)
+    {
+        return PlayerPrefs.GetInt(fruitCount + fruitval);
+    }
+
+    public static string GetfruitCountName(fruit_counter fruit_countersx)
         {
             return PlayerPrefs.GetString(fruitCountName+fruit_countersx);
         }
