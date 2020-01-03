@@ -7,5 +7,41 @@
     "WSIZEPRICE": "215",
     "MMTRPRICE": "216",
     "MCAPPRICE": "217",
-    "PSPEEDPRICE": "218"
+    "PSPEEDPRICE": "218",
+    
+    
+    "CAM1POSX": "217",
+    "CAM1POSY": "217",
+    "CAM1POSZ": "217",
+    "CAM1ROTX": "217",
+    "CAM1ROTY": "217",
+    "CAM1ROTZ": "217",
+    
+    "CAM2POSX": "217",
+    "CAM2POSY": "217",
+    "CAM2POSZ": "217",
+    "CAM2ROTX": "217",
+    "CAM2ROTY": "217",
+    "CAM2ROTZ": "217",
+    
+    "CAM3POSX": "217",
+    "CAM3POSY": "217",
+    "CAM3POSZ": "217",
+    "CAM3ROTX": "217",
+    "CAM3ROTY": "217",
+    "CAM3ROTZ": "217",
+    
+    "CAM4POSX": "217",
+    "CAM4POSY": "217",
+    "CAM4POSZ": "217",
+    "CAM4ROTX": "217",
+    "CAM4ROTY": "217",
+    "CAM4ROTZ": "217",
+    
+    
+    "DAILYBONUS": "217",
+    
+    
+    
+    
 }
