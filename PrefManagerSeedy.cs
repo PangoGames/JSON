@@ -31,9 +31,8 @@ public class PrefManagerSeedy
         private const string offlineEarning = "OFFLINEEARNING";       //offline durumdayken kazanılan para
         private const string instantEarning = "INSTANTEARNING";       //sürede ne kadar getirdiği  ürünlerin 
         
-        //REMOTE
-        private  const string dailyBonus="DAILYBONUS";
-        private  const string dailybonusday="DAILYBNSDAY";
+       
+  
         
         public  enum fruit_counter { tomato, pepper, eggplant , strawberry , dragonfruit , cucumber , corn , blackberry };
         public static string[] fruitsx = {"tomato", "pepper", "eggplant", "strawberry", "dragonfruit", "cucumber","corn", "blackberry" };
@@ -312,31 +311,8 @@ public class PrefManagerSeedy
         }
         #endregion
         
-        #region dailybonuscheck
-        
-        public static void SetDailyBonus(int dailybonus)
-        {
-            PlayerPrefs.SetInt(dailyBonus, dailybonus);
-        }
-
-        public static int GetDailyBonus()
-        {
-            return PlayerPrefs.GetInt(dailyBonus);
-        }
-        #endregion
-        
-        #region dailybonusday
-        
-        public static void SetDailyBonusday(int dailybonusdayx)
-        {
-            PlayerPrefs.SetInt(dailybonusday, dailybonusdayx);
-        }
-
-        public static int GetDailyBonusday()
-        {
-            return PlayerPrefs.GetInt(dailybonusday);
-        }
-        #endregion
+     
+     
 }
 
 

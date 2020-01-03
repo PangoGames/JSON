@@ -32,5 +32,14 @@
     "CAM4ROTX": "217",
     "CAM4ROTY": "217",
     "CAM4ROTZ": "217",
-    "DAILYBONUS": "1"
+    "DAILYBONUS": "1",
+    "ADSFREQUENCY": "1",
+    "tomato": "1",
+    "strawberry": "1",
+    "pepper": "1",
+    "eggplant": "1",
+    "dragonfruit": "1",
+    "cucumber": "1",
+    "corn": "1",
+    "blackberry": "1",
 }
