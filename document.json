@@ -42,5 +42,6 @@
     "cucumber": "1",
     "corn": "1",
     "blackberry": "1",
-    "EXPERIENCE": "1"
+    "EXPERIENCE": "1",
+    "DIGGERLIMIT": "0"
 }
