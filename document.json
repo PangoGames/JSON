@@ -1,5 +1,11 @@
 {
-    "fruit": "Apple",
-    "size": "Large",
-    "color": "Red"
+    "DSPEEDPRICE": "210",
+    "DPOWERPRICE": "211",
+    "SSPEEDPRICE": "212",
+    "SVALUEPRICE": "213",
+    "WCAPPRICE": "214",
+    "WSIZEPRICE": "215",
+    "MMTRPRICE": "216",
+    "MCAPPRICE": "217",
+    "PSPEEDPRICE": "218"
 }
