@@ -12,6 +12,7 @@ public class PrefManagerSeedy
         private const string fruit = "FRUIT";            //FRUIT
         private const string fruitCount = "FRUITCOUNT";  //FRUITCOUNT
         private const string fruitCountName = "FRUITCOUNTNAME";  //FRUITCOUNT
+        private const string fruitPrice= "FRUITPRICE";  //FRUITCOUNT
         
         //UPGRADES    kazmahızı,kazma gücü,dikmehızı,dikmesıklıgı,sukapasitesi,sukalınlıgı,carpan,vitrinkapasitesi
         private const string diggerSpeed = "DIGGERSPEED";             //KAZMAHIZI
@@ -34,9 +35,8 @@ public class PrefManagerSeedy
         private  const string dailyBonus="DAILYBONUS";
         private  const string dailybonusday="DAILYBNSDAY";
         
-        public  enum fruit_counter {apple,eggplant,cucumber};
-
-        public static string[] fruitsx = {"apple", "eggplant", "cucumber"};
+        public  enum fruit_counter { tomato, pepper, eggplant , strawberry , dragonfruit , cucumber , corn , blackberry };
+        public static string[] fruitsx = {"tomato", "pepper", "eggplant", "strawberry", "dragonfruit", "cucumber","corn", "blackberry" };
 
         public static fruit_counter fruit_counters;
         
@@ -145,15 +145,28 @@ public class PrefManagerSeedy
         
             public static void SetFruit(fruit_counter fruit_counters,int open)
             {
-                PlayerPrefs.SetInt("fruit"+fruit_counters, open);
+                PlayerPrefs.SetInt(fruit+fruit_counters, open);
             }
 
             public static int GetFruit(fruit_counter fruit_counters)
             {
-                return PlayerPrefs.GetInt("fruit"+fruit_counters);
+                return PlayerPrefs.GetInt(fruit+fruit_counters);
             }
         #endregion
         
+        //FRUIT PRICE
+        #region fruitprice
+        
+        public static void SetFruitPrice(fruit_counter fruit_counters,int value)
+        {
+            PlayerPrefs.SetInt(fruitPrice+fruit_counters, value);
+        }
+
+        public static int GetFruitPrice(fruit_counter fruit_counters)
+        {
+            return PlayerPrefs.GetInt(fruitPrice+fruit_counters);
+        }
+        #endregion
         //OFFLINE EARNING
         #region offlineEarning
         

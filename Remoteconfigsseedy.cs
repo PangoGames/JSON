@@ -229,6 +229,7 @@ public class Remoteconfigsseedy : MonoBehaviour
         {
             jsonDataClass jsnData = JsonUtility.FromJson<jsonDataClass>(_url);
           
+         /*
             text3.text = jsnData.DSPEEDPRICE;
             text4.text = jsnData.DPOWERPRICE;
             text5.text = jsnData.SSPEEDPRICE;
@@ -238,7 +239,7 @@ public class Remoteconfigsseedy : MonoBehaviour
             text9.text = jsnData.MMTRPRICE;
             text10.text = jsnData.MCAPPRICE;
             text11.text = jsnData.PSPEEDPRICE;
-            
+          */  
              int diggerspeedvalue;
              string value = jsnData.DSPEEDPRICE;
             int.TryParse(value, out diggerspeedvalue);
