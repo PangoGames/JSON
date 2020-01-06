@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using GameAnalyticsSDK;
 using  UnityEngine.UI;
+using  Facebook.Unity;
 public class Remoteconfigsseedy : MonoBehaviour
 {
 
@@ -15,14 +16,21 @@ public class Remoteconfigsseedy : MonoBehaviour
     private const string seederValueval= "SVALUEPRICE";              //DIKMESIKLIGI
     private const string waterCapval= "WCAPPRICE";                    //SUKAPASITESI
     private const string waterSizeval= "WSIZEPRICE";                  //SUKALINLIGI
-    private const string marketmultiplierval= "MMTRPRICE";    //MARKETCARPANI
+    private const string marketmultiplierval= "MMTRPRICE";            //MARKETCARPANI
     private const string marketCapval= "MCAPPRICE";                  //MARKETKAPASITESI    
     private const string pickingSpeedval= "PSPEEDPRICE";            //TOPLAMAHIZIUPGRADE   
-
+    
+    private  const string experience = "EXPERIENCE";
+    private  const string diggerLimit = "DIGGERLIMIT";                //KAZMASURESIUZUN GELIRSE 1 YAP YADA 2 YAP KAZMA ALANI KISALSIN!
+    
     //DAILYBONUS
     private  const string dailyBonus="DAILYBONUS";
     private  const string dailybonusday ="DAILYBNSDAY";
     private  const string adsfrequency = "ADSFREQUENCY";
+
+    //EXIT
+    public  enum exit_counter { digging, seeeding,watering ,picking,hotorder,coldorder};
+    public static exit_counter exit_counters;
     
     #region Cameraposition
         
@@ -69,8 +77,12 @@ public class Remoteconfigsseedy : MonoBehaviour
 
     private void Start()
     {
+        facebookSendMessage();
+        
         StartCoroutine(getData());
         GameAnalytics.Initialize();
+        
+        SetDailyBonusDay();
         Invoke("Checker",1);
     }
 
@@ -78,13 +90,11 @@ public class Remoteconfigsseedy : MonoBehaviour
     {
         CheckUpgradeVal();
     }
-
-  
     public void  CheckUpgradeVal()
     {
         
     }
-
+    
     public Text text1, text2, text3, text4, text5, text6, text7, text8,text9,text10,text11;
     void check_test()
     {
@@ -93,15 +103,38 @@ public class Remoteconfigsseedy : MonoBehaviour
         
     }
           //YAPILACAKLAR VE YAPILANLAR
-          //
+    //ALINACAK VERİLER------------------------------------------------------
           //ilk başta  daily bonus prefi++++
-    
-        //ortalama session süresi 
-        //loop sayısı  
-        //ürünlerden gelecek gelir 
-        
+          //su miktarı update fiyatları++
+          //kazma hızı gücü fiyatı++
+          //TOPLAMA UGRAGE HIZLANDIRMA++
+          //kazmahızı,kazma gücü,dikmehızı,dikmesıklıgı,sukapasitesi,sukalınlıgı,carpan,vitrinkapasitesi seviyeli olacak++
+          //experience sınırını değiştirme++
+          //4 adet kamera acısı * 3 * 3++
+          //kazmayı % kacla bitirdi++
+          
+    //GONDERILECEK VERİLER------------------------------------------------------     
+        //ortalama session süresi ++
+        //ortalama kazma süresi++
+        //ortalama sulama suresi++
         //kazma sayısı input degeri
-        //ortalama sulama suresi
+        
+        //Kazarken mi cıktı++
+        //Sularken mi cıktı++
+        //Tohum atarken mi cıktı++
+        //toplarken mi cıktı++
+        //soguk,sıcak sipariş geldiğinde mi cıktı++
+        
+        //level sonu toplam gelir ++
+        
+        //loop sayısı ++
+        
+        //sıcak siparişi kabul etti
+        //sıcak siparişi reddetti
+        //soğuk siparişi rewarded izledi
+        
+        
+    //GONDERILECEK ALINACAK VERİLER------------------------------------------------------        
         
         //Eğer kazma süreleri uzun gelirse
                 //-->kazma yerinin uzunlugu
@@ -109,31 +142,9 @@ public class Remoteconfigsseedy : MonoBehaviour
                     //-->su miktarı değişecek
                     //-->ürün kasası etkilenecek
                     
-         //su miktarı update fiyatları
-         //kazma hızı gücü fiyatı
-         
-         //hava şartları değikeni  
-         //TOPLAMA UGRAGE HIZLANDIRMA
-         // kazmahızı,kazma gücü,dikmehızı,dikmesıklıgı,sukapasitesi,sukalınlıgı,carpan,vitrinkapasitesi seviyeli olacak
-        
-         //cıkan objeleri satın aldı yada almadı
-         //satın alınmıs objeler
-         //sıcak siparişi kabul etti
-         //sıcak siparişi reddetti
-         //soğuk siparişi rewarded izledi
-         //experience sınırını değiştirme
-        
-         //Kazarken mi cıktı
-         //Sularken mi cıktı
-         //Tohum atarken mi cıktı
-         //toplarken mi cıktı
-         //soguk,sıcak sipariş geldiğinde mi cıktı
-         //4 adet kamera acısı * 3 * 3
-         
-        private const string alldiggertime = "ALLDIGGERTIME";  //KAZMA SURESI
+        private const string alldiggertime = "ALLDIGGERTIME";     //KAZMA SURESI
         private const string leveldiggertime = "LOOPDIGGERTIME";  //LOOPTA KAZMA SURESI
-        
-        private const string marketCap= "MARKETCAP";                  //MARKETKAPASITESI    
+        private const string marketCap= "MARKETCAP";              //MARKETKAPASITESI    
         
         #region CAMERA!
         public static (float,float,float,float,float,float) GetCamera1()
@@ -174,6 +185,29 @@ public class Remoteconfigsseedy : MonoBehaviour
                 PlayerPrefs.GetFloat(CAM4ROTX),
                 PlayerPrefs.GetFloat(CAM4ROTY),
                 PlayerPrefs.GetFloat(CAM4ROTZ));
+        }
+        #endregion
+        #region diggerlimit
+        public static void SetDiggerLimit(int diggerlimitx)
+        {
+            PlayerPrefs.SetInt(Remoteconfigsseedy.diggerLimit, diggerlimitx);
+        }
+
+        public static int GetDiggerLimit()
+        {
+            return PlayerPrefs.GetInt(diggerLimit);
+        }
+        #endregion
+        
+        #region experiencebar
+        public static void SetExperienceLimit(int experience)
+        {
+            PlayerPrefs.SetInt(Remoteconfigsseedy.experience, experience);
+        }
+
+        public static int GetExperienceLimit()
+        {
+            return PlayerPrefs.GetInt(experience);
         }
         #endregion
         
@@ -297,9 +331,9 @@ public class Remoteconfigsseedy : MonoBehaviour
             return PlayerPrefs.GetInt(dailyBonus);
         }
         
-        public static void SetDailyBonusDay(int dailybonus)
+        public static void SetDailyBonusDay()
         {
-            PlayerPrefs.SetInt(dailybonusday, dailybonus);
+            PlayerPrefs.SetInt(dailybonusday, SimpleTimer._instance.getElapsedTimeDays());
         }
 
         public static int GetDailyBonusDay()
@@ -321,9 +355,10 @@ public class Remoteconfigsseedy : MonoBehaviour
         }
 
         #endregion
+        
+        
 
         #region Remote Config JSON
-
         //---------------------Remote Config JSON-------------------------//
         public string jsonURL;
       
@@ -374,8 +409,14 @@ public class Remoteconfigsseedy : MonoBehaviour
             SetmarketCapval(intTRYPARSE(jsnData.MCAPPRICE));
             SetpickingSpeedval(intTRYPARSE(jsnData.PSPEEDPRICE));
 
+            SetExperienceLimit(intTRYPARSE(jsnData.EXPERIENCE));
+            
             SetDailyBonus(intTRYPARSE(jsnData.DAILYBONUS));
             SetDADFrequency(intTRYPARSE(jsnData.ADSFREQUENCY));
+            
+            SetDiggerLimit(intTRYPARSE(jsnData.DIGGERLIMIT));
+            
+            
             
             PlayerPrefs.SetFloat(Remoteconfigsseedy.CAM1POSX,floatTRYPARSE(jsnData.CAM1POSX));
             PlayerPrefs.SetFloat(Remoteconfigsseedy.CAM1POSY,floatTRYPARSE(jsnData.CAM1POSY));
@@ -407,17 +448,32 @@ public class Remoteconfigsseedy : MonoBehaviour
             PlayerPrefs.SetFloat(Remoteconfigsseedy.CAM4ROTY,floatTRYPARSE(jsnData.CAM4ROTY));
             PlayerPrefs.SetFloat(Remoteconfigsseedy.CAM4ROTZ,floatTRYPARSE(jsnData.CAM4ROTZ));
 
+            
+            
+            PrefManagerSeedy.SetFruitPrice(0,floatTRYPARSE(jsnData.tomato));
+            PrefManagerSeedy.SetFruitPrice(1,floatTRYPARSE(jsnData.strawberry));
+            PrefManagerSeedy.SetFruitPrice(2,floatTRYPARSE(jsnData.pepper));
+            PrefManagerSeedy.SetFruitPrice(3,floatTRYPARSE(jsnData.eggplant));
+            PrefManagerSeedy.SetFruitPrice(4,floatTRYPARSE(jsnData.dragonfruit));
+            PrefManagerSeedy.SetFruitPrice(5,floatTRYPARSE(jsnData.cucumber));
+            PrefManagerSeedy.SetFruitPrice(6,floatTRYPARSE(jsnData.corn));
+            PrefManagerSeedy.SetFruitPrice(7,floatTRYPARSE(jsnData.blackberry));
 
             
-            PrefManagerSeedy.SetFruitPrice(PrefManagerSeedy.fruit_counter.tomato,intTRYPARSE(jsnData.tomato));
-            PrefManagerSeedy.SetFruitPrice(PrefManagerSeedy.fruit_counter.strawberry,intTRYPARSE(jsnData.strawberry));
-            PrefManagerSeedy.SetFruitPrice(PrefManagerSeedy.fruit_counter.pepper,intTRYPARSE(jsnData.pepper));
-            PrefManagerSeedy.SetFruitPrice(PrefManagerSeedy.fruit_counter.eggplant,intTRYPARSE(jsnData.eggplant));
-            PrefManagerSeedy.SetFruitPrice(PrefManagerSeedy.fruit_counter.dragonfruit,intTRYPARSE(jsnData.dragonfruit));
-            PrefManagerSeedy.SetFruitPrice(PrefManagerSeedy.fruit_counter.cucumber,intTRYPARSE(jsnData.cucumber));
-            PrefManagerSeedy.SetFruitPrice(PrefManagerSeedy.fruit_counter.corn,intTRYPARSE(jsnData.corn));
-            PrefManagerSeedy.SetFruitPrice(PrefManagerSeedy.fruit_counter.blackberry,intTRYPARSE(jsnData.blackberry));
-
+            PrefManagerSeedy.SetFruitLifeSpan(0,floatTRYPARSE(jsnData.tomatolife));
+            PrefManagerSeedy.SetFruitLifeSpan(1,floatTRYPARSE(jsnData.strawberrylife));
+            PrefManagerSeedy.SetFruitLifeSpan(2,floatTRYPARSE(jsnData.pepperlife));
+            PrefManagerSeedy.SetFruitLifeSpan(3,floatTRYPARSE(jsnData.eggplantlife));
+            PrefManagerSeedy.SetFruitLifeSpan(4,floatTRYPARSE(jsnData.dragonfruitlife));
+            PrefManagerSeedy.SetFruitLifeSpan(5,floatTRYPARSE(jsnData.cucumberlife));
+            PrefManagerSeedy.SetFruitLifeSpan(6,floatTRYPARSE(jsnData.cornlife));
+            PrefManagerSeedy.SetFruitLifeSpan(7,floatTRYPARSE(jsnData.blackberrylife));
+            
+            
+            
+            PrefManagerSeedy.SetofflineCoefficient(floatTRYPARSE(jsnData.offlineCoefficient));
+            PrefManagerSeedy.SetonlineCoefficient( floatTRYPARSE(jsnData.onlineCoefficient));
+            
           /*  text1.text = GetDailyBonus().ToString();
             text2.text = GetCamera2().ToString();
             text3.text = GetADFrequency().ToString();
@@ -432,6 +488,142 @@ public class Remoteconfigsseedy : MonoBehaviour
         }
 
         #endregion
+        //---------------------Facebook Sending Message-------------------------//
+        public void facebookSendMessage()
+        {
+            if (!FB.IsInitialized)
+            {
+                FB.Init(() =>
+                    {
+                        if (FB.IsInitialized)
+                        {
+                            FB.ActivateApp();
+                            FB.GetAppLink(DeepLinkCallback);
+
+                            setAverageLoopingTime(5);
+                            setAverageLoopingTime(6);
+                            setAverageLoopingTime(7);
+                            
+                            setAverageDiggingTime(7);
+                            setAverageDiggingTime(8);
+                            setAverageDiggingTime(9);
+                            
+                            
+                            setAverageWateringTime(9);
+                            setAverageWateringTime(10);
+                            setAverageWateringTime(11);
+
+                            setRevenueforLoop(1000, 60);
+                            setRevenueforLoop(2000, 40);
+                            
+                            setExit(1);
+                            setExit(3);
+
+                            setLoopCount(2);
+                            setLoopCount(4);
+
+                            setAverageDiggerPercentage(1);
+                        }
+                        else
+                            Debug.LogError("Couldn't Initialized Facebook!");
+                    });
+            }
+            else {
+                FB.ActivateApp();
+            }
+            
+        }
+        void DeepLinkCallback(IAppLinkResult result)
+        {
+            if (!String.IsNullOrEmpty(result.Url))
+            {
+                var index = (new Uri(result.Url)).Query.IndexOf("request_ids");
+                if (index != -1)
+                {
+                    // ...have the user interact with the friend who sent the request,
+                    // perhaps by showing them the gift they were given, taking them
+                    // to their turn in the game with that friend, etc.
+                }
+            }
+        }
+
+        public static void setAverageDiggerPercentage(float averageDiggerPercentage)
+        {
+            FB.LogAppEvent(
+                "averageDiggerPercentage",
+                averageDiggerPercentage,
+                new Dictionary<string, object>()
+                {
+                    { AppEventParameterName.Level, "x"}
+                });
+        }
+        
+        public static void setLoopCount(int loop)
+        {
+            FB.LogAppEvent(
+                "setLoopCount",
+                1,
+                new Dictionary<string, object>()
+                {
+                    { AppEventParameterName.Level, loop.ToString()}
+                });
+        }
+        
+        public static void setAverageLoopingTime(float averageLoopingTime)
+        {
+            FB.LogAppEvent(
+                "averageLoopingTime",
+                averageLoopingTime,
+            new Dictionary<string, object>()
+            {
+                { AppEventParameterName.Level, "10x"}
+            });
+        }
+        
+        public static void setAverageDiggingTime(float averageDigingTime)
+        {
+            FB.LogAppEvent(
+                "averageDigingTime",
+                averageDigingTime,
+                new Dictionary<string, object>()
+                {
+                    { AppEventParameterName.Level, "10x"}
+                });
+        }
+        
+        public static void setAverageWateringTime(float averageWateringTime)
+        {
+            FB.LogAppEvent(
+                "averageWateringTime",
+                averageWateringTime,
+                new Dictionary<string, object>()
+                {
+                    { AppEventParameterName.Level, "10x"}
+                });
+        }
+        
+        public static void setRevenueforLoop(float RevenueforLoop,int loop)
+        {
+            FB.LogAppEvent(
+                "RevenueforLoop",
+                RevenueforLoop,
+                new Dictionary<string, object>()
+                {
+                    { AppEventParameterName.Level, loop.ToString()}
+                });
+        }
+        
+        public static void setExit(int where)
+        {
+            FB.LogAppEvent(
+                "exitvalue",
+                1,
+                new Dictionary<string, object>()
+                {
+                    { AppEventParameterName.Level, where.ToString()}
+                    
+                });
+        }
         
 }
 

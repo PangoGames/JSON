@@ -20,6 +20,9 @@ public class jsonDataClass
     public string MCAPPRICE;
     public string PSPEEDPRICE;
 
+    public string EXPERIENCE;  
+    public string DIGGERLIMIT;  
+    
     public string DAILYBONUS;
     
      #region CAM!
@@ -59,8 +62,6 @@ public class jsonDataClass
         #endregion
     
 
-
-     #region FruitsPrice
      public string tomato;  
      public string strawberry;  
      public string pepper;  
@@ -68,10 +69,20 @@ public class jsonDataClass
      public string dragonfruit;  
      public string cucumber;  
      public string corn;  
-     public string blackberry;  
-     
-    #endregion
+     public string blackberry;
 
+     
+     public string tomatolife;  
+     public string strawberrylife;  
+     public string pepperlife;  
+     public string eggplantlife;  
+     public string dragonfruitlife;  
+     public string cucumberlife;  
+     public string cornlife;  
+     public string blackberrylife;
+     
+     public string offlineCoefficient;
+     public string onlineCoefficient;
 }
 [Serializable]
 public class ballList 

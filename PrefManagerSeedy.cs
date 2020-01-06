@@ -30,10 +30,12 @@ public class PrefManagerSeedy
         //EARNINGS
         private const string offlineEarning = "OFFLINEEARNING";       //offline durumdayken kazanılan para
         private const string instantEarning = "INSTANTEARNING";       //sürede ne kadar getirdiği  ürünlerin 
+        private const string fruitLifeSpan = "FRUITLIFESPAN";       //sürede ne kadar getirdiği  ürünlerin 
         
+
+        public const string onlineCoefficient = "ONLINECOEFFICIENT";
+        public const string offlineCoefficient = "OFFLINECOEFFICIENT";
        
-  
-        
         public  enum fruit_counter { tomato, pepper, eggplant , strawberry , dragonfruit , cucumber , corn , blackberry };
         public static string[] fruitsx = {"tomato", "pepper", "eggplant", "strawberry", "dragonfruit", "cucumber","corn", "blackberry" };
 
@@ -49,21 +51,21 @@ public class PrefManagerSeedy
         }
         public static void SetfruitCount(int _fruit_counters, int fruitCountval)
         {
-        PlayerPrefs.SetInt(fruitCount + _fruit_counters, fruitCountval);
+          PlayerPrefs.SetInt(fruitCount + _fruit_counters, fruitCountval);
 
-         PlayerPrefs.SetString(fruitCountName + _fruit_counters, fruitsx[(_fruit_counters)]);
+          PlayerPrefs.SetString(fruitCountName + _fruit_counters, fruitsx[(_fruit_counters)]);
          }
 
-    public static int GetfruitCount(fruit_counter fruitval)
+        public static int GetfruitCount(fruit_counter fruitval)
+            {
+                return PlayerPrefs.GetInt(fruitCount+fruitval);
+            }
+        public static int GetfruitCount(int fruitval)
         {
-            return PlayerPrefs.GetInt(fruitCount+fruitval);
+            return PlayerPrefs.GetInt(fruitCount + fruitval);
         }
-    public static int GetfruitCount(int fruitval)
-    {
-        return PlayerPrefs.GetInt(fruitCount + fruitval);
-    }
 
-    public static string GetfruitCountName(fruit_counter fruit_countersx)
+        public static string GetfruitCountName(fruit_counter fruit_countersx)
         {
             return PlayerPrefs.GetString(fruitCountName+fruit_countersx);
         }
@@ -166,27 +168,73 @@ public class PrefManagerSeedy
         //FRUIT PRICE
         #region fruitprice
         
-        public static void SetFruitPrice(fruit_counter fruit_counters,int value)
+        public static void SetFruitPrice(int fruit_counters,float value)
         {
-            PlayerPrefs.SetInt(fruitPrice+fruit_counters, value);
+            PlayerPrefs.SetFloat(fruitPrice+fruit_counters, value);
         }
 
-        public static int GetFruitPrice(fruit_counter fruit_counters)
+        public static float GetFruitPrice(int fruit_counters)
         {
-            return PlayerPrefs.GetInt(fruitPrice+fruit_counters);
+            return PlayerPrefs.GetFloat(fruitPrice+fruit_counters);
         }
         #endregion
+        
+        
+        //FRUIT Lifespan
+        #region fruitLifeSpan
+        
+        public static void SetFruitLifeSpan(int fruit_counters,float value)
+        {
+            PlayerPrefs.SetFloat(fruitLifeSpan+fruit_counters, value);
+        }
+
+        public static float GetFruitLifeSpan(int fruit_counters)
+        {
+            return PlayerPrefs.GetFloat(fruitLifeSpan+fruit_counters);
+        }
+        #endregion
+        
+        //FRUIT onlineCoefficient
+        #region onlineCoefficient
+        
+        public static void SetonlineCoefficient(float value)
+        {
+            PlayerPrefs.SetFloat(onlineCoefficient, value);
+        }
+
+        public static float GetonlineCoefficient()
+        {
+            return PlayerPrefs.GetFloat(onlineCoefficient);
+        }
+        #endregion
+        
+        
+        
+        //FRUIT offlineCoefficient
+        #region offlineCoefficient
+        
+        public static void SetofflineCoefficient(float value)
+        {
+            PlayerPrefs.SetFloat(offlineCoefficient, value);
+        }
+
+        public static float GetofflineCoefficient()
+        {
+            return PlayerPrefs.GetFloat(offlineCoefficient);
+        }
+        #endregion
+
         //OFFLINE EARNING
         #region offlineEarning
         
-        public static void SetofflineEarning(int offlineEarningval)
+        public static void SetofflineEarning(float offlineEarningval)
         {
-            PlayerPrefs.SetInt(marketCap, offlineEarningval);
+            PlayerPrefs.SetFloat(marketCap, offlineEarningval);
         }
 
-        public static int GetofflineEarning()
+        public static float GetofflineEarning()
         {
-            return PlayerPrefs.GetInt(offlineEarning);
+            return PlayerPrefs.GetFloat(offlineEarning);
         }
         #endregion
         
