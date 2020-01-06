@@ -43,5 +43,21 @@
     "corn": "1",
     "blackberry": "1",
     "EXPERIENCE": "1",
-    "DIGGERLIMIT": "0"
+    "DIGGERLIMIT": "0",
+    "price1": "10",
+    "price2": "10",
+    "price3": "10",
+    "price4": "10",
+    "price5": "10",
+    "price6": "10",
+    "price7": "10",
+    "price8": "10",
+    "life1": "10",
+    "life2": "10",
+    "life3": "10",
+    "life4": "10",
+    "life5": "10",
+    "life6": "10",
+    "life7": "10",
+    "life8": "10"
 }
