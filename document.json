@@ -50,6 +50,6 @@
     "fruitprice":[ "price0", "price1", "price2" , "price3", "price4", "price5", "price6", "price7", "price8"],
     
     
-    "fruitlife":[ "life0", "life1", "life2" , "life3", "life4", "life5", "life6", "life7", "life8"]
+    "fruitlife":[ "life0":10, "life1", "life2" , "life3", "life4", "life5", "life6", "life7", "life8"]
    
 }
