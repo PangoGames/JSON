@@ -46,21 +46,10 @@
     "DIGGERLIMIT": "0",
     "onlineCoefficient": "10",
     "offlineCoefficient": "10",
-    "price0": "10",
-    "price1": "10",
-    "price2": "10",
-    "price3": "10",
-    "price4": "10",
-    "price5": "10",
-    "price6": "10",
-    "price7": "10",
-    "price8": "10",
-    "life0": "10",
-    "life1": "10",
-    "life2": "10",
-    "life3": "10",
-    "life4": "10",
-    "life5": "10",
-    "life6": "10",
-    "life7": "10"
+    
+    "fruitprice":[ "price0", "price1", "price2" , "price3", "price4", "price5", "price6", "price7", "price8"],
+    
+    
+    "fruitlife":[ "life0", "life1", "life2" , "life3", "life4", "life5", "life6", "life7", "life8"]
+   
 }
