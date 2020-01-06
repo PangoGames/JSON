@@ -44,6 +44,8 @@
     "blackberry": "1",
     "EXPERIENCE": "1",
     "DIGGERLIMIT": "0",
+     "offlineCoefficient": "10",
+    "onlineCoefficient": "10",
     "price0": "10",
     "price1": "10",
     "price2": "10",
