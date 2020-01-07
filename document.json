@@ -8,6 +8,18 @@
     "MMTRPRICE": "216",
     "MCAPPRICE": "217",
     "PSPEEDPRICE": "218",
+    
+       "DSPEEDCOF": "210",
+       "DPOWERCOF": "211",
+       "SSPEEDCOF": "212",
+       "SVALUECOF": "213",
+       "WCAPCOF": "214",
+       "WSIZECOF": "215",
+       "MMTRCOF": "216",
+       "MCAPCOF": "217",
+       "PSPEEDCOF": "218",
+       
+       
     "CAM1POSX": "217",
     "CAM1POSY": "217",
     "CAM1POSZ": "217",
