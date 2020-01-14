@@ -57,7 +57,7 @@
     "blackberry": "0.35",
     "EXPERIENCE": "1",
     "DIGGERLIMIT": "0",
-    "onlineCoefficient": "0.55",
+    "onlineCoefficient": "0.85",
     "offlineCoefficient": "1.55",
     "tomatolife": "30",
    "strawberrylife": "45",
