@@ -67,5 +67,8 @@
    "cucumberlife": "54",
    "cornlife": "62",
    "blackberrylife": "69",
-   "bonusLevel": "0"
+   "bonusLevel": "0",
+   "Remotedelaytime": "30",
+   "RemoteMinLevel": "3",
+   "RemoteFirstAdTime": "0"
 }
